@@ -8,7 +8,7 @@ Ce dépôt est enrichi chaque semaine. La semaine 1 pose le cadrage du projet et
 | Rôle | Nom | Identifiant GitHub | Contribution de la semaine - (en cours) |
 | --- | --- | --- | --- |
 | Membre A | Mehdi Benjelloun | [@mehdibn09](https://github.com/mehdibn09) | Cadrage des trois cas d'usage et préparation de l'environnement |
-| Membre B | Oussama Kamil | — | Cadrage et validation de l'environnement |
+| Membre B | Oussama Kamil | [@Oussamak05](https://github.com/oussamak05)  | Cadrage et validation de l'environnement |
 
 ## Structure du dépôt
 
