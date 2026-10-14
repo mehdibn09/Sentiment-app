@@ -1,6 +1,6 @@
-# sentiment-app : dépôt du binôme
+# Sentiment-app : dépôt du binôme
 
-Application fil rouge du cours *Développement et déploiement d'applications intelligentes*.
+Application fil rouge du cours *Développement et Déploiement d'applications intelligentes*.
 Ce dépôt est enrichi chaque semaine. La semaine 1 pose le cadrage du projet et l'environnement de travail ; aucun élément n'est supprimé par la suite.
 
 ## Composition du binôme
