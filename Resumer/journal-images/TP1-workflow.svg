@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="190" viewBox="0 0 900 190">
+  <style>text{font-family:Arial,sans-serif;font-size:16px;fill:#17324d}.box{fill:#eaf3fb;stroke:#2d6a9f;stroke-width:2}.arrow{stroke:#2d6a9f;stroke-width:3;marker-end:url(#m)}</style>
+  <defs><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#2d6a9f"/></marker></defs>
+  <rect class="box" x="20" y="65" width="170" height="65" rx="10"/><text x="105" y="92" text-anchor="middle">Cadrage</text><text x="105" y="115" text-anchor="middle">des 3 cas</text>
+  <rect class="box" x="250" y="65" width="170" height="65" rx="10"/><text x="335" y="92" text-anchor="middle">Environnement</text><text x="335" y="115" text-anchor="middle">Python + venv</text>
+  <rect class="box" x="480" y="65" width="170" height="65" rx="10"/><text x="565" y="92" text-anchor="middle">Dépôt GitHub</text><text x="565" y="115" text-anchor="middle">+ synchronisation</text>
+  <rect class="box" x="710" y="65" width="170" height="65" rx="10"/><text x="795" y="92" text-anchor="middle">Validation</text><text x="795" y="115" text-anchor="middle">pytest + diagnostic</text>
+  <path class="arrow" d="M190 98 H245"/><path class="arrow" d="M420 98 H475"/><path class="arrow" d="M650 98 H705"/>
+</svg>

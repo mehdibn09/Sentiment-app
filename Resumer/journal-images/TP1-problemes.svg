@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220">
+  <style>text{font-family:Arial,sans-serif;font-size:15px;fill:#3d2418}.box{fill:#fff3e8;stroke:#c56a22;stroke-width:2}.arrow{stroke:#c56a22;stroke-width:3;marker-end:url(#m)}</style>
+  <defs><marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#c56a22"/></marker></defs>
+  <rect class="box" x="20" y="75" width="175" height="70" rx="10"/><text x="107" y="103" text-anchor="middle">Fiches vides</text><text x="107" y="125" text-anchor="middle">Rédaction ciblée</text>
+  <rect class="box" x="245" y="75" width="175" height="70" rx="10"/><text x="332" y="103" text-anchor="middle">Dépendances</text><text x="332" y="125" text-anchor="middle">pyarrow 17</text>
+  <rect class="box" x="470" y="75" width="175" height="70" rx="10"/><text x="557" y="103" text-anchor="middle">PowerShell</text><text x="557" y="125" text-anchor="middle">Bypass temporaire</text>
+  <rect class="box" x="695" y="75" width="175" height="70" rx="10"/><text x="782" y="103" text-anchor="middle">Git</text><text x="782" y="125" text-anchor="middle">2 auteurs requis</text>
+  <path class="arrow" d="M195 110 H240"/><path class="arrow" d="M420 110 H465"/><path class="arrow" d="M645 110 H690"/>
+</svg>
