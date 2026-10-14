@@ -14,11 +14,18 @@ Avec un seuil plus bas (0,50), le modèle trancherait seul des cas qu'il ne maî
 
 ## Aperçu de l'application
 
+### Onglet « Un avis » — verdict tranché
+
+Avis clairement négatif (« deux heures perdues, aucun intérêt »), classé « Avis Négatif — Priorité Haute » avec 72 % de confiance, soit au-dessus du seuil de 60 %.
+
+![Avis négatif classé avec 72 % de confiance, au-dessus du seuil de 60 %](captures/Capture.PNG)
+
 ### Onglet « Un avis » — cas incertain
+
+Avis mitigé dont la confiance est inférieure à 60 % : l'interface affiche « À vérifier par un agent » en orange.
 
 ![Cas mitigé classé « à vérifier »](captures/semaine3-un-avis.png)
 
 ### Onglet « Un fichier CSV » — traitement par lot
 
 ![Traitement par lot sur data/sample_reviews.csv (30 avis : 20 négatifs détectés, 7 à vérifier)](captures/semaine3-csv.png)
-
