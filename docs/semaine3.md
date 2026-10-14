@@ -14,9 +14,10 @@ Avec un seuil plus bas (0,50), le modèle trancherait seul des cas qu'il ne maî
 
 ## Aperçu de l'application
 
-### Onglet « Un avis » — verdict tranché
+### Onglet « Analyse d'un avis » — verdict tranché
 
-Avis clairement négatif (« deux heures perdues, aucun intérêt »), classé « Avis Négatif — Priorité Haute » avec 72 % de confiance, soit au-dessus du seuil de 60 %.
+L'avis saisi, « deux heures perdues, aucun interet », est clairement négatif. Après clic sur « Lancer l'analyse », la section « Résultat du diagnostic » affiche **« Avis Négatif — Priorité Haute »** avec un **score de confiance de 72 %**, soit au-dessus du seuil de 60 % (affiché dans la barre latérale sous « Seuil d'incertitude »). Le modèle tranche donc seul, sans renvoi vers un agent. La barre de progression sous le résultat reflète ce score.
 
-![Avis négatif classé avec 72 % de confiance, au-dessus du seuil de 60 %](captures/Capture.PNG)
+La barre latérale confirme aussi la configuration utilisée : modèle du TP2 chargé et moteur Scikit-Learn.
 
+![Interface SentimentAI : avis négatif détecté avec 72 % de confiance, au-dessus du seuil d'incertitude de 60 %](captures/Capture.PNG)
