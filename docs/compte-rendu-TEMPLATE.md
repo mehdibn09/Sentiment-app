@@ -1,8 +1,8 @@
 # Compte rendu global des TP1 à TP3
 
-**Binôme :** Mehdi Benjelloun ([@mehdibn09](https://github.com/mehdibn09)) et Oussama Kamil ([@login2])
+**Binôme :** Mehdi Benjelloun ([@mehdibn09](https://github.com/mehdibn09)) et Oussama Kamil )
 **Dépôt :** https://github.com/mehdibn09/sentiment-app
-**Date :** 14/10/2026
+**Date :** 07/10/2026
 
 > Remplacez chaque crochet. Supprimez les consignes en citation avant de rendre.
 > Quatre à six pages. Vos chiffres, pas ceux du corrigé.
