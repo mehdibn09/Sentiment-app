@@ -1,6 +1,6 @@
 # Compte rendu global — TP1 à TP3
 
-**Binôme :** Mehdi Benjelloun ([@mehdibn09](https://github.com/mehdibn09)) et Oussama Kamil ([@login2])
+**Binôme :** Mehdi Benjelloun ([@mehdibn09](https://github.com/mehdibn09)) et Oussama Kamil ([@Oussamak05](https://github.com/oussamak05))
 **Dépôt :** https://github.com/mehdibn09/sentiment-app
 **Date de remise :** 14 octobre 2026
 **Étiquette Git :** `compte-rendu`
