@@ -15,4 +15,4 @@ jobs:
       - name: Diagnostic
         run: . .venv/bin/activate && python scripts/check_setup.py
       - name: Tests
-        run: . .venv/bin/activate && pytest -q
+        run: . .venv/bin/activate && MIN_GIT_AUTHORS=1 pytest -q

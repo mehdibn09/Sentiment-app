@@ -4,11 +4,22 @@ Ignorés si le dossier n'est pas un dépôt Git (par exemple sur un kit fraîche
 """
 import shutil
 import subprocess
+import os
 from pathlib import Path
 
 import pytest
 
-MIN_AUTHORS = 2  # un binôme : deux auteurs de commits
+def _min_authors() -> int:
+    raw = os.getenv("MIN_GIT_AUTHORS")
+    if raw is None:
+        return 2  # un binôme : deux auteurs de commits
+    try:
+        return max(1, int(raw))
+    except ValueError:
+        return 2
+
+
+MIN_AUTHORS = _min_authors()
 
 
 def _git(root: Path, *args: str) -> str:
