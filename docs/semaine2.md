@@ -1,21 +1,11 @@
 # Semaine 2 — Analyse des erreurs
 
-## Bilan des erreurs
+Sur les 58 avis du jeu de test, le modèle commet **7 erreurs** : 5 avis positifs classés à tort comme négatifs, et 2 avis négatifs classés à tort comme positifs. Ces deux faux positifs représentent le risque le plus élevé, car un client insatisfait verrait sa réclamation traitée avec retard.
 
-Sur les 58 avis du jeu de test, le modèle commet **7 erreurs** :
+L'ensemble de ces erreurs concerne des avis nuancés ou contrastés (du type « positif puis négatif », ou inversement). En effet, l'approche par sac de mots (*bag-of-words*) ignore complètement l'ordre séquentiel : deux tournures opposées génèrent des représentations vectorielles similaires, et le modèle a tendance à s'accrocher aux termes de la première moitié plutôt qu'à la conclusion de l'auteur.
 
-- **5 faux négatifs** : des avis positifs classés négatifs.
-- **2 faux positifs** : des avis négatifs classés positifs. Ce sont les plus coûteux, car un client mécontent serait pris en charge avec retard.
+## Pistes d'amélioration
 
-## Mécanisme à l'origine des erreurs
-
-Les 7 erreurs concernent des avis mitigés du type « bon puis mauvais », ou l'inverse. Le modèle repose sur un sac de mots, qui compte les mots présents sans tenir compte de leur ordre : « le produit est bon mais le service est mauvais » et « le service est mauvais mais le produit est bon » produisent exactement le même vecteur. Le modèle ne peut donc pas repérer que la conclusion, souvent placée en fin d'avis, porte le véritable sentiment du client.
-
-## Pistes de correction
-
-Il faudrait un modèle capable de prendre en compte l'ordre et le contexte des mots :
-
-- **Les n-grammes (1-2 ou 1-3)** : ils capturent des suites de mots comme « pas bon » ou « mais décevant », mais seulement sur de courtes distances.
-- **Un transformer (DistilBERT, CamemBERT)** : il lit l'avis en entier et peut donner plus de poids à la conclusion.
-
-Ces solutions dépassaient l'objectif de la séance, centré sur la mise en place d'un modèle de référence simple et sur la compréhension de ses limites.
+Pour y remédier, il est indispensable de passer à une modélisation sensible à l'ordre des mots :
+* **Alternative classique :** Intégrer des **n-grammes** (1-2 ou 1-3) pour conserver le contexte local des termes.
+* **Alternative moderne :** Basculer sur un **Transformer** (type DistilBERT ou CamemBERT), capable d'analyser la structure syntaxique globale et d'accorder un poids fort au dénouement de l'avis, là où réside l'intention finale.
