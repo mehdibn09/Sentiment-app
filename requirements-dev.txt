@@ -1,0 +1,6 @@
+# Outils de qualité du TP4 : ruff, mypy, couverture, tests de propriétés.
+# Installation : pip install -r requirements.txt -r requirements-dev.txt
+ruff==0.17.*
+mypy==2.4.*
+pytest-cov==7.1.*
+hypothesis==6.170.*
