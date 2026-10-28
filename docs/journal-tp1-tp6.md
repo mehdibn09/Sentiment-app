@@ -1,11 +1,11 @@
-###Journal de bord du binôme : TP1 à TP6 ###
+# Journal de bord du binôme : TP1 à TP6
 
 **Module** : Développement et déploiement d'applications intelligentes · **Enseignant** : A. Larhlimi
 
-|  | Membre A | Membre B | ,
+|  | Membre A | Membre B |
 | :---- | :---- | :---- |
 | Nom | Mehdi Benjelloun | Oussama Kamil |
-| Compte GitHub | @mehdibn09 | @OussamaK05 |
+| Compte GitHub | @mehdibn09 | @Oussamak05 |
 
 **Dépôt** : https://github.com/mehdibn09/Sentiment-app
 
@@ -52,6 +52,16 @@ py -3.11 --version
 git --version
 git config --global user.name
 ```
+
+Pour configurer le poste du membre B avec son identité Git et son compte GitHub :
+
+```powershell
+git config --global user.name "Oussama Kamil"
+git config --global user.name
+gh auth status
+```
+
+Le nom de profil GitHub du membre B est `Oussamak05`. La commande `gh auth status` permet de vérifier le compte authentifié si GitHub CLI est installé. Le nom affiché par `git config` ne détermine pas le compte GitHub utilisé pour le push.
 
 &nbsp;
 
@@ -100,9 +110,11 @@ Oussama Kamil
 
 **Commentaire** :
 
-> Le poste du membre B utilise la même version de Python 3.11.9 et de Git, avec le nom Oussama Kamil, distinct de celui du membre A. Les deux postes sont donc homogènes et prêts à collaborer sur le même dépôt.
+> Le poste du membre B utilise Python 3.11.9 et Git 2.47.1, avec le nom Git Oussama Kamil (compte GitHub : Oussamak05), distinct de celui du membre A. Les versions relevées sont compatibles pour collaborer sur le même dépôt ; l’authentification GitHub doit être vérifiée séparément.
 
 ![Poste du membre B](captures/tp0-poste-membre-b.png)
+
+*Capture à fournir : le fichier `docs/captures/tp0-poste-membre-b.png` doit exister pour que l’image s’affiche dans le journal.*
 
 ---
 
@@ -269,7 +281,7 @@ Diagnostic : 0 erreur(s), 0 avertissement(s)
 ```powershell
 git pull
 git add README.md
-git commit -m "README : ajout de Oussama Kamil au tableau du binôme"
+git commit -m "README : ajout de Oussama Kamil au tableau du binome"
 git push
 git shortlog -sn --all
 python -m pytest tests/test_git_history.py -q
