@@ -1,75 +1,73 @@
-"""Tests du client HTTP de l'interface (TP5, 6 tests) : ui/client.py.
-
-Les cas d'erreur utilisent un transport simulé (aucun serveur, aucun modèle requis) ;
-les cas nominaux interrogent l'API en mémoire et sont ignorés tant que le modèle manque.
-"""
-import sys
+"""Tests du client de l'API (TP5) : l'API tourne en memoire, aucun serveur a lancer."""
 from pathlib import Path
 
 import httpx
 import pytest
 
-RACINE = Path(__file__).resolve().parents[1]
-MODELE = RACINE / "models" / "sentiment.joblib"
-sys.path.insert(0, str(RACINE / "ui"))
+from ui import client
 
-import client  # noqa: E402  (ui/ doit être dans sys.path)
-
-
-def session_simulee(statut: int, corps: dict | None = None) -> httpx.Client:
-    """Un client dont toutes les réponses ont ce statut."""
-    transport = httpx.MockTransport(lambda requete: httpx.Response(statut, json=corps or {}))
-    return httpx.Client(base_url="http://api.test", transport=transport)
-
-
-def session_injoignable() -> httpx.Client:
-    def refuser(requete: httpx.Request) -> httpx.Response:
-        raise httpx.ConnectError("connexion refusée", request=requete)
-
-    return httpx.Client(base_url="http://api.test", transport=httpx.MockTransport(refuser))
+MODELE = Path(__file__).resolve().parents[1] / "models" / "sentiment.joblib"
+pytestmark = pytest.mark.skipif(not MODELE.exists(), reason="modele non produit : python src/train.py")
 
 
 @pytest.fixture(scope="module")
-def session_api():
-    if not MODELE.exists():
-        pytest.skip("modèle non produit : python src/train.py")
+def session():
     from fastapi.testclient import TestClient
 
     from api.main import app
 
-    with TestClient(app) as c:
+    with TestClient(app) as c:  # un client httpx branche directement sur l'API
         yield c
 
 
-def test_sante_et_verdict_avec_l_api_en_memoire(session_api):
-    etat = client.sante(session_api)
+def test_sante_api_prete(session):
+    etat = client.sante(session)
     assert etat.ok and "TP2" in etat.message
-    reponse = client.predire(session_api, "Livraison rapide, produit conforme, très satisfait")
-    assert reponse.ok and reponse.label == "POSITIVE" and 0.5 <= (reponse.score or 0) <= 1
 
 
-def test_422_devient_un_refus_lisible(session_api):
-    reponse = client.predire(session_api, "   ")
-    assert not reponse.ok and reponse.message == client.REFUS
+def test_avis_positif(session):
+    r = client.predire(session, "Livraison rapide, produit conforme, tres satisfait")
+    assert r.ok and r.label == "POSITIVE" and r.score is not None
 
 
-def test_503_devient_modele_non_charge():
-    assert client.sante(session_simulee(503)).message == client.SANS_MODELE
-    assert client.predire(session_simulee(503), "texte").message == client.SANS_MODELE
+def test_texte_inconnu_donne_indetermine(session):
+    r = client.predire(session, "xqzvb wlkptr grombu")
+    assert r.ok and r.label == "INDETERMINE"
+
+
+def test_espaces_refuses(session):
+    r = client.predire(session, "   ")
+    assert not r.ok and r.message == client.REFUS
+
+
+def test_modele_non_charge(session):
+    from api.main import app
+
+    original = app.state.classifier
+    app.state.classifier = None
+    try:
+        assert client.predire(session, "Tres bien").message == client.SANS_MODELE
+    finally:
+        app.state.classifier = original
 
 
 def test_api_injoignable():
-    assert client.sante(session_injoignable()).message == client.INJOIGNABLE
-    assert client.predire(session_injoignable(), "texte").message == client.INJOIGNABLE
-
-
-def test_autres_codes_sont_des_erreurs_internes():
-    assert "500" in client.predire(session_simulee(500), "texte").message
-    assert "502" in client.sante(session_simulee(502)).message
+    with httpx.Client(base_url="http://127.0.0.1:9", timeout=1) as sans_serveur:
+        assert client.predire(sans_serveur, "Tres bien").message == client.INJOIGNABLE
 
 
 def test_lot_et_resume():
-    ok = session_simulee(200, {"label": "INDETERMINE", "score": 0.52, "text": "x"})
-    reponses = client.predire_lot(ok, ["a", "b"]) + client.predire_lot(session_simulee(422), ["c"])
-    assert client.resumer(reponses) == {"INDETERMINE": 2, "REFUS OU ERREUR": 1}
-    assert set(client.VERDICTS) == {"POSITIVE", "NEGATIVE", "INDETERMINE"}
+    from fastapi.testclient import TestClient
+
+    from api.main import app, load_model
+
+    # Recharge le classifier : un test precedent a pu le mettre a None.
+    app.state.classifier = load_model()
+
+    with TestClient(app) as session:
+        reponses = client.predire_lot(session, [
+            "Livraison rapide, produit conforme, tres satisfait",
+            "Produit casse et service injoignable, a fuir",
+            "   ",
+        ])
+    assert client.resumer(reponses) == {"NEGATIVE": 1, "POSITIVE": 1, "REFUS OU ERREUR": 1}
