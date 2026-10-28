@@ -2,7 +2,7 @@
 
 **Module** : Développement et déploiement d'applications intelligentes · **Enseignant** : A. Larhlimi
 
-|  | Membre A | Membre B |
+|  | Membre A | Membre B | ,
 | :---- | :---- | :---- |
 | Nom | Mehdi Benjelloun | Oussama Kamil |
 | Compte GitHub | @mehdibn09 | @OussamaK05 |
