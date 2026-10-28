@@ -1,4 +1,4 @@
-# Journal de bord du binôme : TP1 à TP6
+###Journal de bord du binôme : TP1 à TP6 ###
 
 **Module** : Développement et déploiement d'applications intelligentes · **Enseignant** : A. Larhlimi
 
