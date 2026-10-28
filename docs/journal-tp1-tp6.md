@@ -4,7 +4,7 @@
 
 |  | Membre A | Membre B |
 | :---- | :---- | :---- |
-| Nom | Mehdi Benjelloun | Oussama Kamil  |
+| Nom | Mehdi Benjelloun | Oussama Kamil |
 | Compte GitHub | @mehdibn09 | @OussamaK05 |
 
 **Dépôt** : https://github.com/mehdibn09/Sentiment-app
@@ -63,7 +63,7 @@ git config --global user.name
 Python 3.11.9
 Python 3.11.9
 git version 2.47.1
-Othmane Amaadour
+Mehdi Benjelloun
 ```
 
 - [x] Conforme
@@ -100,7 +100,7 @@ Oussama Kamil
 
 **Commentaire** :
 
-> Le poste du membre B utilise la même version de Python 3.11.9 et de Git, mais avec le nom Mohcine Errachid, distinct de celui du membre A. Les deux postes sont donc homogènes et prêts à collaborer sur le même dépôt.
+> Le poste du membre B utilise la même version de Python 3.11.9 et de Git, avec le nom Oussama Kamil, distinct de celui du membre A. Les deux postes sont donc homogènes et prêts à collaborer sur le même dépôt.
 
 ![Poste du membre B](captures/tp0-poste-membre-b.png)
 
@@ -269,7 +269,7 @@ Diagnostic : 0 erreur(s), 0 avertissement(s)
 ```powershell
 git pull
 git add README.md
-git commit -m "README : ajout de Oussama kamil au tableau du binome"
+git commit -m "README : ajout de Oussama Kamil au tableau du binôme"
 git push
 git shortlog -sn --all
 python -m pytest tests/test_git_history.py -q
