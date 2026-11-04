@@ -43,12 +43,12 @@ def test_espaces_refuses(session):
 def test_modele_non_charge(session):
     from api.main import app
 
-    original = app.state.classifier
-    app.state.classifier = None
+    original = app.state.model
+    app.state.model = None
     try:
         assert client.predire(session, "Tres bien").message == client.SANS_MODELE
     finally:
-        app.state.classifier = original
+        app.state.model = original
 
 
 def test_api_injoignable():
@@ -62,7 +62,7 @@ def test_lot_et_resume():
     from api.main import app, load_model
 
     # Recharge le classifier : un test precedent a pu le mettre a None.
-    app.state.classifier = load_model()
+    app.state.model = load_model()
 
     with TestClient(app) as session:
         reponses = client.predire_lot(session, [
