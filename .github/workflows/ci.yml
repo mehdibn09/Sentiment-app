@@ -47,9 +47,14 @@ jobs:
           .venv/bin/python src/make_demo.py
           .venv/bin/python src/train.py
 
+      - name: Vérifier les compléments explicabilité et biais
+        run: |
+          .venv/bin/python src/expliquer.py
+          .venv/bin/python src/biais.py
+
       - name: Contrôler le code adapté au TP6 avec Ruff
         run: |
-          .venv/bin/ruff check api/model.py sentiment_app src/predict.py tests/test_packaging.py tests/test_client.py
+          .venv/bin/ruff check api/model.py sentiment_app src/predict.py tests/test_packaging.py tests/test_client.py src/expliquer.py src/biais.py ui/graphiques.py tests/test_explicabilite.py tests/test_biais.py tests/test_graphiques.py tests/test_fiche_modele.py
 
       - name: Vérifier les types de l'API
         run: .venv/bin/mypy api
