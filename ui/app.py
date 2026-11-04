@@ -5,6 +5,7 @@ Prérequis : l'API tourne (uvicorn api.main:app). La page est un client de l'API
 elle n'importe jamais predict() ni le fichier .joblib.
 """
 import client
+import graphiques
 import pandas as pd
 import streamlit as st
 
@@ -247,6 +248,11 @@ with onglet_lot:
             st.markdown('</div>', unsafe_allow_html=True)
 
             st.markdown('<div class="custom-card">', unsafe_allow_html=True)
+            st.subheader("Répartition des verdicts")
+            st.bar_chart(graphiques.repartition(reponses))
+            st.subheader("Distribution des confiances")
+            st.caption("Les refus et erreurs sont exclus des confiances.")
+            st.bar_chart(graphiques.histogramme_confiances(reponses))
             st.subheader("Résultats détaillés")
             st.dataframe(tableau, use_container_width=True)
             st.download_button(
