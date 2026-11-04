@@ -497,16 +497,9 @@ F1 macro sur le jeu de test : 0.920 (seuil 0.85)
 
 ### C6 · Explicabilité du modèle — complément TP2
 
-**Statut :** complément prévu dans la trame de référence ; non intégré à la copie TP6 vérifiée. Aucun résultat chiffré n’est revendiqué.
+Explicabilité intégrée : `src/expliquer.py`, tests et fiche modèle. La formule SHAP linéaire analytique utilise la moyenne du corpus de référence, sans dépendance SHAP. Sur l’avis par défaut : base −0.0114, sortie −0.1343 ; la somme des contributions retrouve la sortie. Confiance 0.5335 : abstention. Commandes : `python src/expliquer.py` et `python -m pytest tests/test_explicabilite.py -q`.
 
-```powershell
-python src/expliquer.py
-python -m pytest tests/test_explicabilite.py -q
-```
-
-Installer auparavant le complément TP2 avec son script d’application. Examiner les coefficients du vocabulaire et les contributions TF-IDF d’un avis ; vérifier que leur somme avec l’interception retrouve le score linéaire du modèle. Les contributions expliquent la décision statistique sans établir une cause du sentiment réel.
-
-**Preuve à conserver :** sortie de commande, version du modèle, résultat pytest et capture si demandée. Les valeurs de la trame sont des exemples attendus, à comparer aux mesures réellement obtenues.
+Validation locale détaillée dans `docs/validation-complements.txt`. Captures et exécution GitHub non revendiquées.
 
 ### Membre B, après le TP2
 
@@ -943,16 +936,9 @@ pre-commit : commit fautif refusé
 
 ### T27a · Performances par sous-groupes — complément TP4
 
-**Statut :** complément prévu dans la trame de référence ; non intégré à la copie TP6 vérifiée. Aucun résultat chiffré n’est revendiqué.
+Audit intégré dans `src/biais.py`, sur les 58 avis de test synthétiques du TP2. Directs : 41 avis, exactitude 1.000, 1 abstention. Retournements : 17 avis, exactitude 0.588, 15 abstentions et 2 erreurs restantes. Longueur médiane : 9 mots ; courts 1.000, longs 0.741. Les retournements sont tous longs : aucune causalité attribuable à la longueur. Les groupes sont lexicaux, sans audit démographique. Commandes : `python src/biais.py` et `python -m pytest tests/test_biais.py -q`.
 
-```powershell
-python src/biais.py
-python -m pytest tests/test_biais.py -q
-```
-
-Installer auparavant le complément TP4. Comparer les avis directs et les avis à retournement, puis examiner la longueur en contrôlant le type d’avis. Rapporter les effectifs, l’exactitude et les abstentions de chaque groupe. Une association entre longueur et erreur ne prouve pas que la longueur explique l’erreur ; ces sous-groupes ne suffisent pas non plus à mesurer tous les biais sociaux.
-
-**Preuve à conserver :** sortie de commande, version du modèle, résultat pytest et capture si demandée. Les valeurs de la trame sont des exemples attendus, à comparer aux mesures réellement obtenues.
+Validation locale détaillée dans `docs/validation-complements.txt`. Captures et exécution GitHub non revendiquées.
 
 ### Membre B, après le TP4
 
@@ -1155,16 +1141,9 @@ CI verte, 12 tests du TP5 rejoués
 
 ### T34a · Visualisation du lot — complément TP5
 
-**Statut :** complément prévu dans la trame de référence ; non intégré à la copie TP6 vérifiée. Aucun résultat chiffré n’est revendiqué.
+`ui/graphiques.py` est intégré à `ui/app.py` : répartition des verdicts avec refus/erreurs séparés, histogramme des confiances de 50 à 100 %. Les erreurs sont exclues de cet histogramme. Commande : `python -m pytest tests/test_graphiques.py tests/test_interface.py -q`. Le formulaire et le fichier `data/avis_exemple.csv` utilisent la même colonne CSV `review`.
 
-```powershell
-python -m pytest tests/test_graphiques.py tests/test_interface.py -q
-streamlit run ui/app.py
-```
-
-Installer auparavant le complément TP5 et intégrer les graphiques à la page. Afficher la répartition des verdicts et la distribution des confiances. Vérifier que les refus sont comptés séparément, que les totaux concordent avec le tableau et que les résultats restent lisibles sur un petit lot. La copie actuelle ne contient pas ui/graphiques.py : ces graphiques ne sont donc pas déclarés réalisés.
-
-**Preuve à conserver :** sortie de commande, version du modèle, résultat pytest et capture si demandée. Les valeurs de la trame sont des exemples attendus, à comparer aux mesures réellement obtenues.
+Validation locale détaillée dans `docs/validation-complements.txt`. Captures et exécution GitHub non revendiquées.
 
 ### Membre B, après le TP5
 
@@ -1365,7 +1344,7 @@ Les sources vont dans le dépôt. Les distributions `.whl` et `.tar.gz` peuvent 
 
 ### T41a · Fiche modèle — complément TP6
 
-Le lot de mise à jour fournit séparément `docs/fiche-modele.md`, `tests/test_fiche_modele.py` et `TP6-ETAPE-G.md`. La fiche reste à rédiger avant de déclarer le complément terminé.
+Le lot de mise à jour fournit séparément `docs/fiche-modele.md`, `tests/test_fiche_modele.py` et `TP6-ETAPE-G.md`. La fiche est désormais rédigée avec les résultats du modèle de démonstration et les limites des mesures.
 
 ```powershell
 python -m pytest tests/test_fiche_modele.py -q
@@ -1373,7 +1352,7 @@ python -m pytest tests/test_fiche_modele.py -q
 
 Les dix rubriques attendues sont l’identité, l’usage prévu, les usages exclus, les données, les performances, les limites, les biais, l’explicabilité, les conditions d’usage et la maintenance. La version doit être 0.6.0 ; les métriques doivent correspondre au `metrics.json` courant ; un humain doit être prévu pour les cas douteux. Les mesures de biais et d’explicabilité demandent les compléments correspondants.
 
-**Statut :** fichiers fournis séparément, rédaction et exécution à valider. Les quatorze tests de cette fiche ne sont pas inclus dans le bilan de 102 tests réussis.
+**Statut actualisé :** fiche rédigée et tests intégrés. Le bilan actuel est consigné dans `docs/validation-complements.txt` ; le bilan de 102 tests ci-dessus reste celui de la vérification antérieure.
 
 ### Reproduction par le membre B
 
@@ -1685,3 +1664,8 @@ Pour l’expérience Allociné, le moteur Parquet doit être installé, par exem
 | Dépôt GitHub actuel | Non interrogé lors de cette révision ; CI, commits et tag à vérifier sur GitHub |
 
 Les preuves locales du 4 novembre ne certifient pas l’état actuel du dépôt distant. Lors d’un changement de code, de données ou de modèle, rejouer les contrôles concernés et actualiser ce journal avec la date et la sortie réelle.
+
+
+## Mise à jour des compléments — 4 novembre 2026
+
+Les compléments C6, T27a, T34a et fiche modèle sont intégrés. Les mesures concernent le modèle de démonstration, pas Allociné. Le workflow corrigé livré aujourd’hui est inclus ; son exécution sur GitHub reste à confirmer. Voir `docs/validation-complements.txt`.
