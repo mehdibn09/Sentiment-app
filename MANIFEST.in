@@ -1,0 +1,7 @@
+include LIVRAISON.md CHANGELOG.md requirements*.txt pytest.ini
+include TP*-ETAPE-*.md
+recursive-include src *.py
+recursive-include docs *.md *.txt
+recursive-include data *.csv
+recursive-include tests *.py
+exclude models/*.joblib
