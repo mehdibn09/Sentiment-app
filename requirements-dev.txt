@@ -4,3 +4,5 @@ ruff==0.17.*
 mypy==2.4.*
 pytest-cov==7.1.*
 hypothesis==6.170.*
+# TP6 : construire la roue
+build==1.2.2.post1
