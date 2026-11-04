@@ -1,0 +1,71 @@
+Validation locale — 4 novembre 2026
+Python 3.12, scikit-learn 1.5 ; environnement existant de validation.
+Commande : python -m pytest -q
+132 passed, 4 skipped, 3 xfailed.
+30 tests complémentaires réussis.
+4 tests ignorés faute de dépôt Git ; 3 xfail documentent des limites connues.
+Ruff : All checks passed! sur les nouveaux scripts et tests.
+Les variables de proxy de cet environnement ont été retirées pour exécuter le test réseau local.
+CI GitHub non exécutée depuis cet environnement. Validation Windows non rejouée.
+Les tests Streamlit vérifient le rendu des graphiques et les interactions existantes de la page.
+
+.......................................................s................ [ 51%]
+..sss....................x........x.....x..........................      [100%]
+=============================== warnings summary ===============================
+tests/test_api.py::test_root
+  /workspace/scratch/5fa4380c0aed/tp6_env/lib/python3.12/site-packages/starlette/testclient.py:37: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+tests/test_api.py: 4 warnings
+tests/test_biais.py: 4 warnings
+tests/test_explicabilite.py: 4 warnings
+tests/test_integration.py: 24 warnings
+tests/test_interface.py: 4 warnings
+tests/test_model.py: 4 warnings
+tests/test_packaging.py: 4 warnings
+tests/test_ui.py: 4 warnings
+  /workspace/scratch/5fa4380c0aed/tp6_env/lib/python3.12/site-packages/joblib/numpy_pickle.py:188: DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.
+  As an alternative, you can create a new view using np.reshape (with copy=False if needed).
+    array.shape = self.shape
+
+tests/test_graphiques.py::test_les_graphiques_s_affichent
+  /workspace/scratch/5fa4380c0aed/tp6_env/lib/python3.12/site-packages/streamlit/elements/vega_charts.py:358: AltairDeprecationWarning: 
+  Deprecated since `altair=5.5.0`. Use altair.theme instead.
+  Most cases require only the following change:
+  
+      # Deprecated
+      alt.themes.enable('quartz')
+  
+      # Updated
+      alt.theme.enable('quartz')
+  
+  If your code registers a theme, make the following change:
+  
+      # Deprecated
+      def custom_theme():
+          return {'height': 400, 'width': 700}
+      alt.themes.register('theme_name', custom_theme)
+      alt.themes.enable('theme_name')
+  
+      # Updated
+      @alt.theme.register('theme_name', enable=True)
+      def custom_theme():
+          return alt.theme.ThemeConfig(
+              {'height': 400, 'width': 700}
+          )
+  
+  See the updated User Guide for further details:
+      https://altair-viz.github.io/user_guide/api.html#theme
+      https://altair-viz.github.io/user_guide/customization.html#chart-themes
+    with alt.themes.enable("none") if alt.themes.active == "default" else nullcontext():  # type: ignore[attr-defined,unused-ignore]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] ../review_today/Sentiment-app-main/tests/test_environment.py:54: pas un dépôt Git
+SKIPPED [1] ../review_today/Sentiment-app-main/tests/test_git_history.py:29: pas un dépôt Git
+SKIPPED [1] ../review_today/Sentiment-app-main/tests/test_git_history.py:33: pas un dépôt Git
+SKIPPED [1] ../review_today/Sentiment-app-main/tests/test_git_history.py:41: pas un dépôt Git
+XFAIL tests/test_jeu_or.py::test_pas_d_erreur_franche[avis-02] - négation : « pas » est un mot isolé du sac de mots, « déçu » est lu comme négatif
+XFAIL tests/test_jeu_or.py::test_pas_d_erreur_franche[avis-11] - mitigé : « rapide » et « non fonctionnel » se compensent, le modèle conclut positif
+XFAIL tests/test_jeu_or.py::test_pas_d_erreur_franche[avis-17] - négation : « mécontent » est lu comme négatif, « pas » est ignoré
+132 passed, 4 skipped, 3 xfailed, 54 warnings in 3.10s
