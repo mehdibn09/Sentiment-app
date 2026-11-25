@@ -2,6 +2,14 @@
 
 Le numéro de version suit les TP : 0.N.0 à la fin du TP N. Chaque version publiée porte une étiquette Git `v0.N.0`.
 
+## Non publié — extension TP5 MLflow 3 / DVC
+
+- Parcours `--tp5` à trois classes, distinct du modèle binaire existant.
+- Données déterministes, pipeline DVC, expériences MLflow et registre avec alias champion.
+- Promotion conditionnelle, prédiction via registre et exécution MLflow Projects.
+- Tests d’intégration, guide Windows et rapport avec mesures locales.
+- Version du paquet conservée à 0.6.0 ; aucun nouveau tag publié automatiquement.
+
 ## 0.6.0 (TP6) : le paquet
 
 - Paquet installable sentiment-app 0.6.0 et commande sentiment : version, predict, serve, ui.
