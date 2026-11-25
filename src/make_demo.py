@@ -9,6 +9,7 @@ ils font commettre au modèle quelques erreurs instructives.
 Usage : python src/make_demo.py
 Produit : data/demo_reviews.csv
 """
+
 import csv
 import random
 from pathlib import Path
@@ -38,7 +39,13 @@ NEGATIFS = [
     "Facture erronée, aucun geste commercial",
 ]
 ATTENUATIONS = ["au début", "les premiers jours", "sur le papier", "à la livraison", "au déballage"]
-RETOURNEMENTS = ["mais finalement", "sauf que ensuite", "puis rapidement", "avant que", "jusqu'à ce que"]
+RETOURNEMENTS = [
+    "mais finalement",
+    "sauf que ensuite",
+    "puis rapidement",
+    "avant que",
+    "jusqu'à ce que",
+]
 NEUTRES = [
     "Reçu dans les délais annoncés",
     "Conforme à la fiche produit",
@@ -61,7 +68,12 @@ def phrases_mitigees(nombre, rng):
             debut, fin, etiquette = rng.choice(POSITIFS), rng.choice(NEGATIFS), "negative"
         else:
             debut, fin, etiquette = rng.choice(NEGATIFS), rng.choice(POSITIFS), "positive"
-        lignes.append((f"{debut} {rng.choice(ATTENUATIONS)}, {rng.choice(RETOURNEMENTS)} {fin.lower()}.", etiquette))
+        lignes.append(
+            (
+                f"{debut} {rng.choice(ATTENUATIONS)}, {rng.choice(RETOURNEMENTS)} {fin.lower()}.",
+                etiquette,
+            )
+        )
     return lignes
 
 
@@ -98,4 +110,11 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    import sys
+
+    if "--tp5" in sys.argv:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        from sentiment_app.tp5.cli import main as tp5_main
+
+        raise SystemExit(tp5_main(["data", *[a for a in sys.argv[1:] if a != "--tp5"]]))
     raise SystemExit(main())
