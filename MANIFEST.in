@@ -5,3 +5,8 @@ recursive-include docs *.md *.txt
 recursive-include data *.csv
 recursive-include tests *.py
 exclude models/*.joblib
+
+include MLproject python_env.yaml params.yaml dvc.yaml dvc.lock TP5-MLOPS.md RAPPORT.md
+recursive-exclude data/tp5 *.csv
+recursive-exclude models *.joblib
+include .gitignore .dvcignore .dvc/config .dvc/.gitignore data/tp5/.gitignore data/tp5/*.dvc
