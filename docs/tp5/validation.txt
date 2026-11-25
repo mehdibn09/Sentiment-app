@@ -1,0 +1,76 @@
+Validation locale
+25 novembre 2026. Python 3.12, environnement neuf. Voir environnement-valide.json.
+Le poste Windows et le workflow GitHub Actions du binôme ne sont pas certifiés par ces exécutions.
+
+Tests TP5 : python -m pytest tests/test_tp5_mlops.py -q
+30 passed, 9 warnings in 11.62s
+
+Suite technique : pytest -q --ignore=tests/test_git_history.py --cov=api --cov-fail-under=95
+api/main.py          57      0   100%
+api/model.py         29      0   100%
+api/schemas.py       23      0   100%
+api/securite.py      44      0   100%
+api/v1.py            27      0   100%
+TOTAL               180      0   100%
+Required test coverage of 95% reached. Total coverage: 100.00%
+184 passed, 3 xfailed, 11 warnings in 19.02s
+
+Ruff
+All checks passed!
+
+Mypy API
+Success: no issues found in 6 source files
+
+DVC : min_df 2 -> 3, exécution sélective
+'data/tp5/demo_reviews.csv.dvc' didn't change, skipping
+Stage 'prepare' didn't change, skipping
+Running stage 'train':
+> python src/train.py --tp5
+
+DVC : deuxième exécution sans modification
+'data/tp5/demo_reviews.csv.dvc' didn't change, skipping
+Stage 'prepare' didn't change, skipping
+Stage 'train' didn't change, skipping
+Data and pipelines are up to date.
+
+DVC : pull avec cache initialement vide
+A       data/tp5/demo_reviews.csv
+1 file fetched and 1 file added
+Comparaison octet par octet avec le CSV source : réussie.
+
+Promotion acceptée
+{
+  "promu": true,
+  "f1_macro": 0.9039724656163012,
+  "run_id": "73a020a36b5147248160e72dad617ea0",
+  "min_f1": 0.8,
+  "version": 1,
+  "uri": "models:/sentiment-tp5@champion"
+}
+
+Promotion refusée, alias conservé
+{
+  "promu": false,
+  "f1_macro": 0.9039724656163012,
+  "run_id": "73a020a36b5147248160e72dad617ea0",
+  "min_f1": 1.0
+}
+Code de sortie : 1
+La conservation de la version de champion est aussi vérifiée dans test_tracking_et_promotion.
+
+MLflow Projects
+Run c71fdf766f7a4e5e8be81b9a00d232d9 : succeeded ; ngram_max=3 ; F1 macro=0.8761973426717479.
+
+Paquet
+Roue et archive source construites. Sous-package sentiment_app.tp5 présent. Modèles .joblib exclus. Données TP5 générées exclues de la distribution ; métadonnées DVC et rapport inclus.
+
+Installation depuis copie du correctif sans cache
+Génération du CSV, dvc repro, promotion et prédiction via registre : réussis.
+'data/tp5/demo_reviews.csv.dvc' didn't change, skipping
+Stage 'prepare' didn't change, skipping
+Stage 'train' didn't change, skipping
+Data and pipelines are up to date.
+
+Limites de validation
+Tests d’historique Git exclus de la suite technique : les contributions réelles doivent être contrôlées dans le dépôt du binôme.
+Trois xfail et avertissements de dépendances conservés. Les mesures concernent des avis synthétiques.
