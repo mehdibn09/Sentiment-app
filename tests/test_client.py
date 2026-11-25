@@ -52,7 +52,7 @@ def test_modele_non_charge(session):
 
 
 def test_api_injoignable():
-    with httpx.Client(base_url="http://127.0.0.1:9", timeout=1) as sans_serveur:
+    with httpx.Client(base_url="http://127.0.0.1:9", timeout=1, trust_env=False) as sans_serveur:
         assert client.predire(sans_serveur, "Tres bien").message == client.INJOIGNABLE
 
 
