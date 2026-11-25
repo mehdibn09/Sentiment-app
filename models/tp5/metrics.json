@@ -1,0 +1,10 @@
+{
+  "f1_macro": 0.8893178893178892,
+  "accuracy": 0.8904109589041096,
+  "n_train": 217,
+  "n_test": 73,
+  "run_id": "9ebbf8a350fc41f7a885dccb67e286ae",
+  "model_uri": "models:/m-ed5044466c7f49f88d3214beabf4b859",
+  "train_sha256": "3b1deb7dce42c1410a76b4374630a3bddc73afad92548954774c784d88fbd0c9",
+  "test_sha256": "71e619db41b9b4c5230fb9b6a4ace29347881a135a69ab76bb21323f4f03d84c"
+}
