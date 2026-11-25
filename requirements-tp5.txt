@@ -1,0 +1,3 @@
+# TP5 MLflow 3 / DVC ; installation depuis la racine du dépôt.
+-e .[ui,mlops]
+pytest>=8.3,<9

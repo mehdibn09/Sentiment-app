@@ -76,3 +76,25 @@ make help           # liste complète des commandes
 | `DEPANNAGE.md` | Solutions aux problèmes courants |
 | `docs/cadrage/GRILLE-DE-DECISION.md` | Support de la partie A pour renseigner les fiches de cadrage |
 | `exemples/README.md` | À consulter après le TP : aperçu des travaux des semaines 2 et 5 |
+
+
+## Extension TP5 — MLflow 3 et DVC
+
+Le document `TP5_complet.pdf` ajoute un parcours MLOps à trois classes :
+`positif`, `negatif`, `neutre`. Le [guide TP5](TP5-MLOPS.md) décrit l’installation,
+le versionnement DVC, les expériences MLflow, la promotion et les commandes Windows.
+Les mesures de validation figurent dans [RAPPORT.md](RAPPORT.md).
+
+```bash
+python -m pip install -r requirements-tp5.txt
+python src/make_demo.py --tp5
+dvc repro
+python src/promote.py
+python src/predict.py --tp5 --registre "Excellent produit, je recommande."
+```
+
+Le mode `--tp5` utilise `data/tp5/` et `models/tp5/`. Le modèle binaire,
+l’API et l’interface Streamlit conservent leur fonctionnement antérieur.
+Dans ce parcours, `neutre` est une classe ; `INDETERMINE` reste une décision
+d’abstention propre à l’API binaire. Le TP5 historique consacré à Streamlit
+reste documenté dans ses fichiers d’origine.

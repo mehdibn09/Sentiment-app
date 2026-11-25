@@ -1,0 +1,29 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py data/tp5/demo_reviews.csv
+    deps:
+      - data/tp5/demo_reviews.csv
+      - src/prepare.py
+      - sentiment_app/tp5/core.py
+      - sentiment_app/tp5/cli.py
+    params:
+      - prepare.seed
+      - prepare.test_size
+    outs:
+      - data/tp5/prepared
+  train:
+    cmd: python src/train.py --tp5
+    deps:
+      - src/train.py
+      - sentiment_app/tp5/core.py
+      - sentiment_app/tp5/cli.py
+      - data/tp5/prepared
+    params:
+      - train.seed
+      - train.ngram_max
+      - train.min_df
+    outs:
+      - models/tp5/sentiment.joblib
+    metrics:
+      - models/tp5/metrics.json:
+          cache: false

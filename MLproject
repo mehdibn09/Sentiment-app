@@ -1,0 +1,7 @@
+name: sentiment-app-tp5
+python_env: python_env.yaml
+entry_points:
+  train:
+    parameters:
+      ngram_max: {type: int, default: 2}
+    command: "python src/train.py --tp5 --ngram-max {ngram_max}"

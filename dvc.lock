@@ -1,0 +1,65 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python src/prepare.py data/tp5/demo_reviews.csv
+    deps:
+    - path: data/tp5/demo_reviews.csv
+      hash: md5
+      md5: e980dabe842f8c624229d3ea4be13bc9
+      size: 16345
+    - path: sentiment_app/tp5/cli.py
+      hash: md5
+      md5: 059bb656759705b83b8a73f920774252
+      size: 2424
+    - path: sentiment_app/tp5/core.py
+      hash: md5
+      md5: 75fdde10ff043992685dd479b1219774
+      size: 10693
+    - path: src/prepare.py
+      hash: md5
+      md5: f46604b20890d2c42a907714e1abda8e
+      size: 278
+    params:
+      params.yaml:
+        prepare.seed: 42
+        prepare.test_size: 0.25
+    outs:
+    - path: data/tp5/prepared
+      hash: md5
+      md5: 0dfc85e13f20c5e8c41baa43b3cbad62.dir
+      size: 16358
+      nfiles: 2
+  train:
+    cmd: python src/train.py --tp5
+    deps:
+    - path: data/tp5/prepared
+      hash: md5
+      md5: 0dfc85e13f20c5e8c41baa43b3cbad62.dir
+      size: 16358
+      nfiles: 2
+    - path: sentiment_app/tp5/cli.py
+      hash: md5
+      md5: 059bb656759705b83b8a73f920774252
+      size: 2424
+    - path: sentiment_app/tp5/core.py
+      hash: md5
+      md5: 75fdde10ff043992685dd479b1219774
+      size: 10693
+    - path: src/train.py
+      hash: md5
+      md5: d5cb0e88878d2ede7eff5ec4f9a31fc3
+      size: 4118
+    params:
+      params.yaml:
+        train.min_df: 2
+        train.ngram_max: 2
+        train.seed: 42
+    outs:
+    - path: models/tp5/metrics.json
+      hash: md5
+      md5: 1dc527ff92b003e33f94d5655f0dca3f
+      size: 385
+    - path: models/tp5/sentiment.joblib
+      hash: md5
+      md5: 2cd08945421c0b1bcb2ff90388cd6741
+      size: 10129
