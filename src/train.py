@@ -7,6 +7,7 @@ Usage :
 
 Produit : models/sentiment.joblib et models/metrics.json
 """
+
 import argparse
 import json
 from datetime import date
@@ -45,10 +46,15 @@ def charger(allocine: bool) -> tuple[pd.DataFrame, str]:
 def construire_pipeline() -> Pipeline:
     """Vectoriseur et modèle dans un seul objet : la même transformation
     s'applique forcément à l'entraînement et en production."""
-    return Pipeline([
-        ("tfidf", TfidfVectorizer(ngram_range=(1, 2), min_df=2, sublinear_tf=True)),
-        ("clf", LogisticRegression(max_iter=1000, class_weight="balanced", random_state=GRAINE)),
-    ])
+    return Pipeline(
+        [
+            ("tfidf", TfidfVectorizer(ngram_range=(1, 2), min_df=2, sublinear_tf=True)),
+            (
+                "clf",
+                LogisticRegression(max_iter=1000, class_weight="balanced", random_state=GRAINE),
+            ),
+        ]
+    )
 
 
 def main() -> int:
@@ -69,26 +75,45 @@ def main() -> int:
     pipeline.fit(X_train, y_train)
     print(f"Vocabulaire : {len(pipeline.named_steps['tfidf'].vocabulary_)} termes")
 
-    rapport = classification_report(y_test, pipeline.predict(X_test), output_dict=True, zero_division=0)
+    rapport = classification_report(
+        y_test, pipeline.predict(X_test), output_dict=True, zero_division=0
+    )
     f1 = rapport["macro avg"]["f1-score"]
     print(f"F1 macro sur le jeu de test : {f1:.3f} (seuil {SEUIL_F1})")
 
     MODELE.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(pipeline, MODELE)
-    METRIQUES.write_text(json.dumps({
-        "source": source,
-        "date": date.today().isoformat(),
-        "n_train": len(X_train),
-        "n_test": len(X_test),
-        "f1_macro": round(f1, 4),
-        "accuracy": round(rapport["accuracy"], 4),
-        "recall_negative": round(rapport["negative"]["recall"], 4),
-        "seuil_f1": SEUIL_F1,
-    }, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    METRIQUES.write_text(
+        json.dumps(
+            {
+                "source": source,
+                "date": date.today().isoformat(),
+                "n_train": len(X_train),
+                "n_test": len(X_test),
+                "f1_macro": round(f1, 4),
+                "accuracy": round(rapport["accuracy"], 4),
+                "recall_negative": round(rapport["negative"]["recall"], 4),
+                "seuil_f1": SEUIL_F1,
+            },
+            indent=2,
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     print(f"Modèle : {MODELE.relative_to(RACINE)}")
-    print(f"Métriques : {METRIQUES.relative_to(RACINE)} (versionné dans Git, contrairement au modèle)")
+    print(
+        f"Métriques : {METRIQUES.relative_to(RACINE)} (versionné dans Git, contrairement au modèle)"
+    )
     return 0
 
 
 if __name__ == "__main__":
+    import sys
+
+    if "--tp5" in sys.argv:
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        from sentiment_app.tp5.cli import main as tp5_main
+
+        raise SystemExit(tp5_main(["train", *[a for a in sys.argv[1:] if a != "--tp5"]]))
     raise SystemExit(main())
