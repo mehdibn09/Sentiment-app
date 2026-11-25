@@ -31,12 +31,13 @@ jobs:
           cache-dependency-path: |
             pyproject.toml
             requirements-dev.txt
+            requirements-tp5.txt
 
       - name: Installer le paquet, l'interface et les outils de test
         run: |
           python -m venv .venv
           .venv/bin/python -m pip install --upgrade pip
-          .venv/bin/python -m pip install -e ".[ui]" -r requirements-dev.txt "pytest==8.3.*"
+          .venv/bin/python -m pip install -r requirements-tp5.txt -r requirements-dev.txt "pytest==8.3.*"
           .venv/bin/python -m pip check
 
       - name: Vérifier l'environnement et les fiches de cadrage
