@@ -1669,3 +1669,19 @@ Les preuves locales du 4 novembre ne certifient pas l’état actuel du dépôt 
 ## Mise à jour des compléments — 4 novembre 2026
 
 Les compléments C6, T27a, T34a et fiche modèle sont intégrés. Les mesures concernent le modèle de démonstration, pas Allociné. Le workflow corrigé livré aujourd’hui est inclus ; son exécution sur GitHub reste à confirmer. Voir `docs/validation-complements.txt`.
+
+
+## Extension TP5 MLflow 3 / DVC — 25 novembre 2026
+
+Le nouveau document TP5 porte sur MLOps ; le TP5 historique Streamlit reste conservé.
+Le parcours `--tp5` à trois classes est intégré séparément du modèle binaire.
+La validation locale couvre les trois expériences, le registre avec alias champion,
+le refus de promotion, le push/pull DVC, l’exécution sélective et MLflow Projects.
+
+- 30 tests TP5 passent ; suite technique : 184 tests passent et 3 xfail connus.
+- Couverture API : 100 %. Ruff, mypy, pip check et construction du paquet passent.
+- Corpus synthétique : 290 avis, séparation 217/73 ; meilleur F1 macro : 0,9040.
+- Les tests d’historique Git ne certifient pas les contributions du binôme dans cette copie.
+- Lancement Windows et exécution GitHub Actions après push restent à vérifier.
+
+Procédure : [TP5-MLOPS.md](../TP5-MLOPS.md). Mesures : [RAPPORT.md](../RAPPORT.md).
