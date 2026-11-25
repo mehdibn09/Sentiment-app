@@ -1,0 +1,5 @@
+outs:
+- md5: e980dabe842f8c624229d3ea4be13bc9
+  size: 16345
+  hash: md5
+  path: demo_reviews.csv
