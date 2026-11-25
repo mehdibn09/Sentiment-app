@@ -1,5 +1,6 @@
 # Environnement Python
 .venv/
+.venv*/
 __pycache__/
 *.pyc
 *.egg-info/
@@ -10,10 +11,12 @@ build/
 .env
 
 # Artefacts lourds (DVC et MLflow à partir de la semaine 7)
-models/*
+models/*.joblib
+models/*.pkl
 !models/.gitkeep
 !models/metrics.json
-data/*
+data/*.csv
+data/*.parquet
 !data/.gitkeep
 !data/sample_reviews.csv
 !data/jeu_or.csv
@@ -33,3 +36,25 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+
+# TP5 MLflow 3 / DVC
+mlartifacts/
+mlflow.db-*
+!data/tp5/
+!data/tp5/*.dvc
+!data/tp5/.gitignore
+!models/tp5/
+models/tp5/*.joblib
+!models/tp5/metrics.json
+.dvc/cache/
+.dvc/tmp/
+.dvc/config.local
+# DVC doit pouvoir parcourir les dossiers parents des fichiers .dvc.
+!data/
+!models/
+
+# Caches des outils de validation
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+coverage.xml
